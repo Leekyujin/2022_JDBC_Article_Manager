@@ -19,5 +19,9 @@ title = CONCAT('제목',RAND()),
 `body` = CONCAT('내용',RAND());
 
 SELECT * FROM article;
+
+SELECT *
+FROM article 
+ORDER BY id DESC;
 ```
 
