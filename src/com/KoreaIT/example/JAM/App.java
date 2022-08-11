@@ -199,7 +199,7 @@ public class App {
 			System.out.println("== 게시물 삭제 ==");
 
 			try {
-				String sql = "DELETE from article";
+				String sql = "DELETE FROM article";
 				sql += " WHERE id = " + id;
 
 				System.out.println(sql);
