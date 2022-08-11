@@ -20,6 +20,10 @@ title = CONCAT('제목',RAND()),
 
 SELECT * FROM article;
 
+SELECT COUNT(*)
+FROM article
+WHERE id = 2;
+
 SELECT *
 FROM article 
 ORDER BY id DESC;

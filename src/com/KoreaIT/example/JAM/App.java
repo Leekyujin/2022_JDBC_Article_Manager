@@ -2,7 +2,6 @@ package com.KoreaIT.example.JAM;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +61,11 @@ public class App {
 
 	private int doAction(Connection conn, Scanner sc, String cmd) {
 
+		if (cmd.equals("exit")) {
+			System.out.println("프로그램을 종료합니다.");
+			return -1;
+		}
+
 		if (cmd.equals("article write")) {
 			System.out.println("== 게시물 작성 ==");
 			System.out.printf("제목 : ");
@@ -103,6 +107,7 @@ public class App {
 				return 0;
 			}
 			System.out.println("번호  /  제목");
+			
 			for (Article article : articles) {
 				System.out.printf("%d  /  %s\n", article.id, article.title);
 			}
@@ -131,49 +136,31 @@ public class App {
 		} else if (cmd.startsWith("article delete ")) {
 			int id = Integer.parseInt(cmd.split(" ")[2]);
 
-			PreparedStatement pstmt = null;
-
 			System.out.println("== 게시물 삭제 ==");
 
-			try {
-				String sql = "DELETE FROM article";
-				sql += " WHERE id = " + id;
-
-				System.out.println(sql);
-
-				pstmt = conn.prepareStatement(sql);
-
-				int affectedRows = pstmt.executeUpdate();
-
-				System.out.println("affectedRows : " + affectedRows);
-
-			} catch (SQLException e) {
-				System.out.println("에러: " + e);
-			} finally {
-				try {
-					if (conn != null && !conn.isClosed()) {
-						conn.close();
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				try {
-					if (pstmt != null && !pstmt.isClosed()) {
-						pstmt.close();
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			SecSql sql = new SecSql();
+			
+			sql.append("SELECT COUNT(*)");
+			sql.append("FROM article");
+			sql.append(" WHERE id = ?", id);
+			
+			int articlesCount = DBUtil.selectRowIntValue(conn, sql);
+			
+			if (articlesCount == 0) {
+				System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+				return 0;
 			}
+			
+			sql = new SecSql();
+			sql.append("DELETE FROM article");
+			sql.append(" WHERE id = ?", id);
+			
+			DBUtil.delete(conn, sql);
+			
 			System.out.printf("%d번 게시물이 삭제되었습니다.\n", id);
 
 		} else {
 			System.out.println("존재하지 않는 명령어입니다.");
-		}
-
-		if (cmd.equals("exit")) {
-			System.out.println("프로그램을 종료합니다.");
-			return -1;
 		}
 
 		return 0;
