@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.KoreaIT.example.JAM.Article;
+import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.ArticleService;
 import com.KoreaIT.example.JAM.util.DBUtil;
 import com.KoreaIT.example.JAM.util.SecSql;
@@ -15,9 +16,8 @@ public class ArticleController extends Controller {
 
 	private ArticleService articleService;
 
-	public ArticleController(Connection conn, Scanner sc) {
-		super(sc);
-		articleService = new ArticleService(conn);
+	public ArticleController() {
+		articleService = Container.articleService;
 	}
 
 	public void doWrite(String cmd) {
@@ -43,7 +43,7 @@ public class ArticleController extends Controller {
 		sql.append("FROM article");
 		sql.append("ORDER BY id DESC");
 
-		List<Map<String, Object>> articlesListMap = DBUtil.selectRows(conn, sql);
+		List<Map<String, Object>> articlesListMap = DBUtil.selectRows(Container.conn, sql);
 
 		for (Map<String, Object> articleMap : articlesListMap) {
 			articles.add(new Article(articleMap));
@@ -71,7 +71,7 @@ public class ArticleController extends Controller {
 		sql.append("FROM article");
 		sql.append(" WHERE id = ?", id);
 
-		int articlesCount = DBUtil.selectRowIntValue(conn, sql);
+		int articlesCount = DBUtil.selectRowIntValue(Container.conn, sql);
 
 		if (articlesCount == 0) {
 			System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -90,7 +90,7 @@ public class ArticleController extends Controller {
 		sql.append(", `body` = ?", body);
 		sql.append(" WHERE id = ?", id);
 
-		DBUtil.update(conn, sql);
+		DBUtil.update(Container.conn, sql);
 
 		System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
 	}
@@ -121,7 +121,7 @@ public class ArticleController extends Controller {
 		sql.append("FROM article");
 		sql.append(" WHERE id = ?", id);
 
-		Map<String, Object> articleMap = DBUtil.selectRow(conn, sql);
+		Map<String, Object> articleMap = DBUtil.selectRow(Container.conn, sql);
 
 		if (articleMap.isEmpty()) {
 			System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);

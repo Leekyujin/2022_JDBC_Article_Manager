@@ -1,19 +1,14 @@
 package com.KoreaIT.example.JAM.controller;
 
 
-import java.sql.Connection;
-import java.util.Scanner;
-
+import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.MemberService;
-import com.KoreaIT.example.JAM.util.DBUtil;
-import com.KoreaIT.example.JAM.util.SecSql;
 
 public class MemberController extends Controller{
 	private MemberService memberService;
 
-	public MemberController(Connection conn, Scanner sc) {
-		super(sc);
-		memberService = new MemberService(conn);
+	public MemberController() {
+		memberService = Container.memberService;
 	}
 
 	public void doJoin(String cmd) {
