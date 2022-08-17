@@ -1,15 +1,11 @@
 package com.KoreaIT.example.JAM.controller;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.service.ArticleService;
-import com.KoreaIT.example.JAM.util.DBUtil;
-import com.KoreaIT.example.JAM.util.SecSql;
 
 public class ArticleController extends Controller {
 
@@ -38,7 +34,7 @@ public class ArticleController extends Controller {
 		List<Article> articles = articleService.getArticles();
 
 		if (articles.size() == 0) {
-			System.out.println("게시물이 없습니다");
+			System.out.println("게시물이 없습니다.");
 			return;
 		}
 		System.out.println("번호  /  제목");
