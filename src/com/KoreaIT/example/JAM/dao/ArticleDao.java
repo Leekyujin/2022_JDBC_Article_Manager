@@ -49,7 +49,7 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*, M.name AS extra__writer");
 		sql.append("FROM article AS A");
-		sql.append("INNER JOIN member AS M");
+		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
 		sql.append("WHERE A.id = ?", id);
 
@@ -77,7 +77,7 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*, M.name AS extra__writer");
 		sql.append("FROM article AS A");
-		sql.append("INNER JOIN member AS M");
+		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
 		sql.append("ORDER BY A.id DESC");
 
@@ -89,5 +89,14 @@ public class ArticleDao {
 			articles.add(new Article(articleMap));
 		}
 		return articles;
+	}
+
+	public void increaseHit(int id) {
+		SecSql sql = new SecSql();
+		sql.append("UPDATE article");
+		sql.append("SET hit = hit + 1");
+		sql.append("WHERE id = ?", id);
+		
+		DBUtil.update(Container.conn, sql);
 	}
 }

@@ -36,4 +36,8 @@ public class ArticleService {
 	public void doUpdate(int id, String title, String body) {
 		articleDao.doUpdate(id, title, body);		
 	}
+
+	public void increaseHit(int id) {
+		articleDao.increaseHit(id);
+	}
 }
