@@ -47,5 +47,4 @@ public class MemberDao {
 		}
 		return new Member(memberMap);
 	}
-
 }

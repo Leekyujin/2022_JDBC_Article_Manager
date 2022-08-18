@@ -99,5 +99,4 @@ public class ArticleController extends Controller {
 		System.out.printf("제목 : %s\n", article.title);
 		System.out.printf("내용 : %s\n", article.body);
 	}
-
 }

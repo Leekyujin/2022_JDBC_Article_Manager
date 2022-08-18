@@ -85,5 +85,4 @@ public class ArticleDao {
 		}
 		return articles;
 	}
-
 }

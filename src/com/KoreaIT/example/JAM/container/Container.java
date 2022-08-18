@@ -24,7 +24,6 @@ public class Container {
 	public static Session session;
 
 	public static Scanner sc;
-
 	public static Connection conn;
 
 	public static void init() {

@@ -162,5 +162,4 @@ public class MemberController extends Controller {
 			System.out.println(Container.session.loginedMember.id);
 		}
 	}
-
 }
