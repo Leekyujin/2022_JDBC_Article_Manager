@@ -1,5 +1,4 @@
 ```sql
-# DB 생성
 DROP DATABASE IF EXISTS article_manager;
 CREATE DATABASE article_manager;
 
@@ -39,6 +38,22 @@ updateDate = NOW(),
 loginId = CONCAT('TestId',RAND()),
 loginPW = CONCAT('TestPw',RAND()),
 `name` = CONCAT('TestName',RAND());
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test1',
+loginPW = 'test1',
+`name` = '김철수';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test2',
+loginPW = 'test2',
+`name` = '김영희';
+
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL;
 
 SELECT * FROM article;
 SELECT * FROM `member`;

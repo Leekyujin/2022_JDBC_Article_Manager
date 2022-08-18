@@ -164,5 +164,6 @@ public class MemberController extends Controller {
 
 	public void doLogout(String cmd) {
 		Container.session.doLogout();
+		System.out.println("로그아웃 되었습니다.");
 	}
 }
