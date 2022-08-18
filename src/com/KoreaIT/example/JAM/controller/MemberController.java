@@ -147,8 +147,7 @@ public class MemberController extends Controller {
 
 			System.out.printf("%s님 환영합니다.\n", member.name);
 			
-			Container.session.loginedMemberId = member.id;
-			Container.session.loginedMember = member;
+			Container.session.doLogin(member);
 			
 			break;
 		}
@@ -156,10 +155,14 @@ public class MemberController extends Controller {
 	}
 
 	public void showProfile(String cmd) {
-		if (Container.session.loginedMemberId == -1) {
+		if (Container.session.isLogined() == false) {
 			System.out.println("로그인 상태가 아닙니다.");
 		} else {
-			System.out.println(Container.session.loginedMember.id);
+			System.out.println(Container.session.loginedMember.name);
 		}
+	}
+
+	public void doLogout(String cmd) {
+		Container.session.doLogout();
 	}
 }
