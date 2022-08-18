@@ -23,5 +23,4 @@ public class Session {
 		loginedMember = member;
 		loginedMemberId = member.id;
 	}
-
 }

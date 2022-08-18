@@ -43,10 +43,10 @@ public class ArticleController extends Controller {
 			return;
 		}
 		
-		System.out.println("번호  /  제목");
+		System.out.println("번호  /      작성날짜            /    제목     /  작성자 ");
 
 		for (Article article : articles) {
-			System.out.printf("%d  /  %s\n", article.id, article.title);
+			System.out.printf("%3d   /  %s     /   %4s    /  %3s\n", article.id, article.regDate, article.title, article.extra__writer);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class ArticleController extends Controller {
 			System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
 			return;
 		}
-
+		
 		System.out.printf("== %d번 게시물 수정 ==\n", id);
 		System.out.printf("새 제목 : ");
 		String title = sc.nextLine();
@@ -113,6 +113,7 @@ public class ArticleController extends Controller {
 		System.out.printf("번호 : %d\n", article.id);
 		System.out.printf("작성날짜 : %s\n", article.regDate);
 		System.out.printf("수정날짜 : %s\n", article.updateDate);
+		System.out.printf("작성자 : %s\n", article.extra__writer);
 		System.out.printf("제목 : %s\n", article.title);
 		System.out.printf("내용 : %s\n", article.body);
 	}

@@ -10,5 +10,4 @@ public class Controller {
 	public Controller() {
 		this.sc = Container.sc;
 	}
-	
 }

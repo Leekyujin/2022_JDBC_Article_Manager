@@ -26,19 +26,7 @@ CREATE TABLE `member` (
     `name` CHAR(200) NOT NULL
 );
 
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = CONCAT('제목',RAND()),
-`body` = CONCAT('내용',RAND());
-
-INSERT INTO `member`
-SET regDate = NOW(),
-updateDate = NOW(),
-loginId = CONCAT('TestId',RAND()),
-loginPW = CONCAT('TestPw',RAND()),
-`name` = CONCAT('TestName',RAND());
-
+# 임시 회원 데이터
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -53,9 +41,52 @@ loginId = 'test2',
 loginPW = 'test2',
 `name` = '김영희';
 
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL;
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+DESC article;
 
 SELECT * FROM article;
 SELECT * FROM `member`;
+
+# 임시 게시물 데이터
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목1',
+`body` = '내용1',
+memberId = 1;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목2',
+`body` = '내용2',
+memberId = 1;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목3',
+`body` = '내용3',
+memberId = 2;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = '제목4',
+`body` = '내용4',
+memberId = 2;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = CONCAT('제목',RAND()),
+`body` = CONCAT('내용',RAND());
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = CONCAT('TestId',RAND()),
+loginPW = CONCAT('TestPw',RAND()),
+`name` = CONCAT('TestName',RAND());
 ```
 
