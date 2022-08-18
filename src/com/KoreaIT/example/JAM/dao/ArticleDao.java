@@ -28,15 +28,6 @@ public class ArticleDao {
 		return id;
 	}
 
-	public boolean isArticleExists(int id) {
-		SecSql sql = new SecSql();
-		sql.append("SELECT COUNT(*) > 0");
-		sql.append("FROM article");
-		sql.append("WHERE id = ?", id);
-
-		return DBUtil.selectRowBooleanValue(Container.conn, sql);
-	}
-
 	public void deDelete(int id) {
 		SecSql sql = new SecSql();
 		sql.append("DELETE FROM article");

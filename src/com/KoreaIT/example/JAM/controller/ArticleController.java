@@ -34,14 +34,14 @@ public class ArticleController extends Controller {
 	}
 
 	public void showList(String cmd) {
-		System.out.println("== 게시물 목록 ==");
-
 		List<Article> articles = articleService.getArticles();
 
 		if (articles.size() == 0) {
 			System.out.println("게시물이 없습니다.");
 			return;
 		}
+		
+		System.out.println("== 게시물 목록 ==");
 		
 		System.out.println("번호  /      작성날짜            /    제목     /  작성자  / 조회수");
 
@@ -66,8 +66,8 @@ public class ArticleController extends Controller {
 			return;
 		}
 		
-		if (article.memberId != Container.session.loginedMember.id) {
-			System.out.println("게시물 수정 권한이 없습니다.");
+		if (article.memberId != Container.session.loginedMemberId) {
+			System.out.println("해당 게시물에 대한 권한이 없습니다.");
 			return;
 		}
 		
@@ -90,14 +90,19 @@ public class ArticleController extends Controller {
 		
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 		
-		boolean isArticleExists = articleService.isArticleExists(id);
+		Article article = articleService.getArticleById(id);
 
-		if (isArticleExists == false) {
+		if (article == null) {
 			System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
 			return;
 		}
+		
+		if (article.memberId != Container.session.loginedMember.id) {
+			System.out.println("해당 게시물에 대한 권한이 없습니다.");
+			return;
+		}
 
-		System.out.println("== 게시물 삭제 ==");
+		System.out.printf("== %d번 게시물 삭제 ==\n", id);
 		
 		articleService.doDelete(id);
 		

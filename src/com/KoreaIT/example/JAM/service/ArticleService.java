@@ -17,10 +17,6 @@ public class ArticleService {
 		return articleDao.doWrite(memberId, title, body);
 	}
 
-	public boolean isArticleExists(int id) {
-		return articleDao.isArticleExists(id);
-	}
-
 	public void doDelete(int id) {
 		articleDao.deDelete(id);
 	}
