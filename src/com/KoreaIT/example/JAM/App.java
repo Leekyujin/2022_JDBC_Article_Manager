@@ -81,7 +81,7 @@ public class App {
 			memberController.showProfile(cmd); 
 		} else if (cmd.equals("article write")) {
 			articleController.doWrite(cmd);
-		} else if (cmd.equals("article list")) {
+		} else if (cmd.startsWith("article list")) {
 			articleController.showList(cmd);
 		} else if (cmd.startsWith("article modify ")) {
 			articleController.doModify(cmd);
